@@ -294,6 +294,30 @@ class TestAutomatedTrafficCounter(unittest.TestCase):
             mock_file.assert_called_once_with("custom_data.txt", "r")
             mock_print.assert_called()
 
+    @patch('automated_traffic_counter.open', new_callable=mock_open, read_data="2021-12-01T05:00:00 5\n2021-12-01T05:30:00 12\n2021-12-01T06:00:00 14\n")
+    @patch('sys.argv', ['automated_traffic_counter.py'])
+    def test_main_least_cars_output(self, mock_file):
+        """Test that main function outputs the least cars timestamp message."""
+        with patch('builtins.print') as mock_print:
+            main()
+            
+            # Check that the specific print statement from line 51 was called
+            # The call should include the timestamp with least cars in 90 minutes
+            print_calls = [call.args[0] for call in mock_print.call_args_list]
+            
+            # Look for the specific message format from line 51
+            least_cars_message_found = any(
+                "Timestamp with least number of cars seen in next 90 minutes:" in str(call)
+                for call in print_calls
+            )
+            
+            self.assertTrue(least_cars_message_found, 
+                           "Expected print statement not found in output")
+            
+            # Also verify the timestamp should be "2021-12-01T05:00:00" (the first timestamp with contiguous data)
+            expected_message = "Timestamp with least number of cars seen in next 90 minutes: 2021-12-01T05:00:00"
+            self.assertIn(expected_message, print_calls)
+
     def test_integration_workflow(self):
         """Integration test for the complete workflow."""
         # Create a temporary file with test data
