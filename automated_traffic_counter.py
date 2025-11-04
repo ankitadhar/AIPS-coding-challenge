@@ -48,7 +48,8 @@ def main():
     print("\n\nFinding contiguous 90 minutes intervals car counts...")
     contiguous_ninty_mins_traffic = get_contiguous_ninty_mins_traffic(data_dict)
     least_cars_timestamp = min(contiguous_ninty_mins_traffic.items(), key=lambda x: x[1])
-    print("Timestamp           Number of cars seen in next 90 minutes")
+    print(f"Timestamp with least number of cars seen in next 90 minutes: {least_cars_timestamp[0]}")
+    print("\nTimestamp           Number of cars seen in next 90 minutes")
     print("---------------------------------------------------")
     print(f"{least_cars_timestamp[0]}\t{least_cars_timestamp[1]}")
 
