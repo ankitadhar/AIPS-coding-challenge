@@ -87,11 +87,10 @@ class TestTrafficAnalysisResult(unittest.TestCase):
         repr_output = repr(result)
         
         # Check that the custom repr is used (contains expected sections)
-        self.assertIn("Calculating total traffic...", repr_output)
         self.assertIn("The number of cars seen in total: 398", repr_output)
-        self.assertIn("Calculating daily traffic...", repr_output)
-        self.assertIn("Finding top 3 half hours with highest traffic...", repr_output)
-        self.assertIn("Finding contiguous 90 minutes intervals car counts...", repr_output)
+        self.assertIn("Daily traffic...", repr_output)
+        self.assertIn("Top 3 half hours with highest traffic...", repr_output)
+        self.assertIn("Timestamp with least number of cars seen in next 90 minutes", repr_output)
 
     def test_traffic_analysis_result_str_representation(self):
         """Test TrafficAnalysisResult string representation (should use custom __repr__)."""
@@ -126,7 +125,6 @@ class TestTrafficAnalysisResult(unittest.TestCase):
         
         repr_output = repr(result)
         
-        self.assertIn("Calculating daily traffic...", repr_output)
         self.assertIn("Date       Number of cars seen", repr_output)
         self.assertIn("-------------------------------", repr_output)
         self.assertIn("2021-12-01\t179", repr_output)
@@ -147,8 +145,8 @@ class TestTrafficAnalysisResult(unittest.TestCase):
         )
         
         repr_output = repr(result)
-        
-        self.assertIn("Finding top 3 half hours with highest traffic...", repr_output)
+
+        self.assertIn("Top 3 half hours with highest traffic...", repr_output)
         self.assertIn("Timestamp           Number of cars seen", repr_output)
         self.assertIn("---------------------------------------", repr_output)
         self.assertIn("2021-12-01T07:30:00 46", repr_output)
@@ -167,7 +165,6 @@ class TestTrafficAnalysisResult(unittest.TestCase):
         
         repr_output = repr(result)
         
-        self.assertIn("Finding contiguous 90 minutes intervals car counts...", repr_output)
         self.assertIn("Timestamp with least number of cars seen in next 90 minutes: 2021-12-01T05:00:00", repr_output)
 
     def test_traffic_analysis_result_field_types(self):
@@ -232,13 +229,12 @@ class TestTrafficAnalysisResult(unittest.TestCase):
         lines = repr_output.split('\n')
         
         # Should have multiple sections with proper formatting
-        self.assertTrue(any("Calculating total traffic..." in line for line in lines))
         self.assertTrue(any("260" in line for line in lines))
-        self.assertTrue(any("Calculating daily traffic..." in line for line in lines))
+        self.assertTrue(any("Daily traffic..." in line for line in lines))
         self.assertTrue(any("2021-12-01\t179" in line for line in lines))
-        self.assertTrue(any("Finding top 3 half hours" in line for line in lines))
+        self.assertTrue(any("Top 3 half hours with highest traffic..." in line for line in lines))
         self.assertTrue(any("2021-12-01T07:30:00 46" in line for line in lines))
-        self.assertTrue(any("Finding contiguous 90 minutes" in line for line in lines))
+        self.assertTrue(any("Timestamp with least number of cars seen in next 90 minutes" in line for line in lines))
         self.assertTrue(any("2021-12-01T05:00:00" in line for line in lines))
 
     def test_traffic_analysis_result_print_output(self):

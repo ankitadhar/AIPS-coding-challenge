@@ -17,7 +17,11 @@ def main():
     else: 
         file_path = args.inputfile
 
+    print("Analyzing traffic data...")
+
     traffic_analyzer = TrafficAnalyzer(file_path)
+
+    print("Generating traffic analysis report...")
 
     traffic_analysis_result = TrafficAnalysisResult(
         total_traffic = traffic_analyzer.calculate_traffic(),
@@ -26,6 +30,7 @@ def main():
         least_ninety_mins_traffic = traffic_analyzer.least_cars_in_ninety_mins()
     )
 
+    print("\nTraffic Analysis Result:\n")
     print(traffic_analysis_result)
 
 if __name__ == "__main__":

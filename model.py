@@ -24,22 +24,20 @@ class TrafficAnalysisResult:
         Custom string representation for better readability.
         """
         result = []
-        result.append(f"\n\nCalculating total traffic...")
         result.append(f"The number of cars seen in total: {self.total_traffic}")
 
-        result.append(f"\n\nCalculating daily traffic...")
+        result.append(f"\n\nDaily traffic...")
         result.append("Date       Number of cars seen")
         result.append("-------------------------------")
         for date, traffic in self.daily_traffic.items():
             result.append(f"{date}\t{traffic}")
 
-        result.append(f"\n\nFinding top 3 half hours with highest traffic...")
+        result.append(f"\n\nTop 3 half hours with highest traffic...")
         result.append("Timestamp           Number of cars seen")
         result.append("---------------------------------------")
         for record in self.top_n_half_hours:
             result.append(f"{record.timestamp} {record.car_count}")
 
-        result.append(f"\n\nFinding contiguous 90 minutes intervals car counts...")
         result.append(f"Timestamp with least number of cars seen in next 90 minutes: {self.least_ninety_mins_traffic.timestamp}")
         
         return "\n".join(result)
