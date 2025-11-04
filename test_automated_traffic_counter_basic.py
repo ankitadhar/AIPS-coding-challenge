@@ -5,7 +5,7 @@ import tempfile
 import os
 from datetime import datetime, timedelta
 
-from automated_traffic_counter import (
+from basic.automated_traffic_counter_basic import (
     transform_data,
     calculate_traffic,
     get_date,
@@ -292,8 +292,8 @@ class TestAutomatedTrafficCounter(unittest.TestCase):
 
     # Test cases for main function
 
-    @patch('automated_traffic_counter.open', new_callable=mock_open, read_data="2021-12-01T05:00:00 5\n2021-12-01T05:30:00 12\n2021-12-01T06:00:00 14\n")
-    @patch('sys.argv', ['automated_traffic_counter.py'])
+    @patch('basic.automated_traffic_counter_basic.open', new_callable=mock_open, read_data="2021-12-01T05:00:00 5\n2021-12-01T05:30:00 12\n2021-12-01T06:00:00 14\n")
+    @patch('sys.argv', ['basic.automated_traffic_counter_basic.py'])
     def test_main_default_file(self, mock_file):
         """Test main function with default file path."""
         with patch('builtins.print') as mock_print:
@@ -301,8 +301,8 @@ class TestAutomatedTrafficCounter(unittest.TestCase):
             mock_file.assert_called_once_with("./data.txt", "r")
             mock_print.assert_called()
 
-    @patch('automated_traffic_counter.open', new_callable=mock_open, read_data="2021-12-01T05:00:00 5\n2021-12-01T05:30:00 12\n2021-12-01T06:00:00 14\n")
-    @patch('sys.argv', ['automated_traffic_counter.py', '--inputfile', 'custom_data.txt'])
+    @patch('basic.automated_traffic_counter_basic.open', new_callable=mock_open, read_data="2021-12-01T05:00:00 5\n2021-12-01T05:30:00 12\n2021-12-01T06:00:00 14\n")
+    @patch('sys.argv', ['basic.automated_traffic_counter_basic.py', '--inputfile', 'custom_data.txt'])
     def test_main_custom_file(self, mock_file):
         """Test main function with custom file path."""
         with patch('builtins.print') as mock_print:
@@ -312,8 +312,8 @@ class TestAutomatedTrafficCounter(unittest.TestCase):
 
     # Test that main function outputs the least cars timestamp message.
 
-    @patch('automated_traffic_counter.open', new_callable=mock_open, read_data="2021-12-01T05:00:00 5\n2021-12-01T05:30:00 12\n2021-12-01T06:00:00 14\n")
-    @patch('sys.argv', ['automated_traffic_counter.py'])
+    @patch('basic.automated_traffic_counter_basic.open', new_callable=mock_open, read_data="2021-12-01T05:00:00 5\n2021-12-01T05:30:00 12\n2021-12-01T06:00:00 14\n")
+    @patch('sys.argv', ['basic.automated_traffic_counter_basic.py'])
     def test_main_least_cars_output(self, mock_file):
         """Test that main function outputs the least cars timestamp message."""
         with patch('builtins.print') as mock_print:
