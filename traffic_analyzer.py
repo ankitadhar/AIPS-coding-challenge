@@ -1,18 +1,6 @@
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
-
-
-@dataclass
-class TrafficRecord:
-    timestamp: str
-    car_count: int
-
-@dataclass
-class TrafficAnalysisResult:
-    total_traffic: int
-    daily_traffic: dict
-    top_n_half_hours: list
-    least_ninety_mins_traffic: tuple
+from model import TrafficRecord
 
 @dataclass
 class TrafficAnalyzer:
@@ -50,8 +38,8 @@ class TrafficAnalyzer:
         """
         Function to find the timestamp with least number of cars seen in next 90 minutes.
         """
-        least_cars_timestamp = min(self._get_contiguous_ninety_mins_traffic().items(), key=lambda x: x[1])
-        return f'{least_cars_timestamp[0]} {least_cars_timestamp[1]}'
+        least_traffic_ninty_mins = min(self._get_contiguous_ninety_mins_traffic(), key=lambda x: x.car_count)
+        return least_traffic_ninty_mins
 
     def _transform_data(self):
         """
@@ -99,9 +87,11 @@ class TrafficAnalyzer:
         """
         Function to calculate car count for contiguous 90 minutes intervals.
         """
-        return {
-            self.traffic_data[i].timestamp: sum(
-                record.car_count for record in self._get_next_records(i)
+        return [
+            TrafficRecord(
+                timestamp=self.traffic_data[i].timestamp,
+                car_count=sum(record.car_count for record in self._get_next_records(i)),
+                duration_mins=90
             )
             for i in range(len(self.traffic_data)) if self._has_contiguous_records(i)
-        }
+        ]
