@@ -1,5 +1,17 @@
 # AIPS Coding Challenge
 
+## Solution
+The final solution contains 3 main python files: main.py, traffic_analysis.py, model.py
+
+To execute run the `main.py` file.
+You can provide the input file from command line as:
+```
+python3 main.py --inputfile data/test_data.txt
+```
+
+if --inputfile is provided then the file will processed in the program, 
+else the default file at `data/data.txt` will be processed to generate output.
+
 ## The Task
 An automated traffic counter sits by a road and counts the number of cars that go
 past. Every half-hour the counter outputs the number of cars seen and resets the counter
