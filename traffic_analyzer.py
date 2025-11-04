@@ -4,6 +4,14 @@ from model import TrafficRecord
 
 @dataclass
 class TrafficAnalyzer:
+    """
+    Class to analyze traffic data from a given file.
+    1. Transforms the data into a list of TrafficRecord
+    2. Calculates total traffic
+    3. Calculates daily traffic
+    4. Finds top n half hours with highest traffic
+    5. Finds contiguous 90 minutes intervals car counts
+    """
     data_file_path: str
     traffic_data: list[TrafficRecord] = field(default_factory=list)
 
