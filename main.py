@@ -17,7 +17,11 @@ def main():
     else: 
         file_path = args.inputfile
 
+    print("Analyzing traffic data...")
+
     traffic_analyzer = TrafficAnalyzer(file_path)
+
+    print("Generating traffic analysis report...")
 
     traffic_analysis_result = TrafficAnalysisResult(
         total_traffic = traffic_analyzer.calculate_traffic(),
