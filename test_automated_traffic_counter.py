@@ -57,6 +57,8 @@ class TestAutomatedTrafficCounter(unittest.TestCase):
 2021-12-01T07:00:00 25
 2021-12-01T07:30:00 46"""
 
+    # Test cases for transform_data
+
     def test_transform_data(self):
         """Test transform_data function."""
         mock_file = StringIO(self.sample_file_content)
@@ -86,6 +88,8 @@ class TestAutomatedTrafficCounter(unittest.TestCase):
         expected = {"2021-12-01T05:00:00": 5}
         self.assertEqual(result, expected)
 
+    # Test cases for calculate_traffic
+
     def test_calculate_traffic(self):
         """Test calculate_traffic function."""
         result = calculate_traffic(self.sample_data_dict)
@@ -102,6 +106,8 @@ class TestAutomatedTrafficCounter(unittest.TestCase):
         data = {"2021-12-01T05:00:00": 10}
         result = calculate_traffic(data)
         self.assertEqual(result, 10)
+
+    # Test cases for get_date
 
     def test_get_date(self):
         """Test get_date function."""
@@ -121,6 +127,8 @@ class TestAutomatedTrafficCounter(unittest.TestCase):
             with self.subTest(timestamp=timestamp):
                 result = get_date(timestamp)
                 self.assertEqual(result, expected)
+
+    # Test cases for get_daily_traffic
 
     def test_get_daily_traffic(self):
         """Test get_daily_traffic function."""
@@ -177,6 +185,8 @@ class TestAutomatedTrafficCounter(unittest.TestCase):
         result = get_top_n_half_hours(self.sample_data_dict, n=0)
         self.assertEqual(len(result), 0)
 
+    # Test cases for next_ts
+
     def test_next_ts(self):
         """Test next_ts function."""
         timestamp = "2021-12-01T05:00:00"
@@ -206,6 +216,8 @@ class TestAutomatedTrafficCounter(unittest.TestCase):
         expected = "2021-12-02T00:30:00"
         self.assertEqual(result, expected)
 
+    # Test cases for has_contiguous_records
+
     def test_has_contiguous_records_true(self):
         """Test has_contiguous_records when records exist."""
         # Create data with contiguous records
@@ -234,6 +246,8 @@ class TestAutomatedTrafficCounter(unittest.TestCase):
         }
         result = has_contiguous_records("2021-12-01T05:00:00", data)
         self.assertFalse(result)
+
+    # Test cases for get_contiguous_ninty_mins_traffic
 
     def test_get_contiguous_ninty_mins_traffic(self):
         """Test get_contiguous_ninty_mins_traffic function."""
@@ -276,6 +290,8 @@ class TestAutomatedTrafficCounter(unittest.TestCase):
         result = get_contiguous_ninty_mins_traffic({})
         self.assertEqual(result, {})
 
+    # Test cases for main function
+
     @patch('automated_traffic_counter.open', new_callable=mock_open, read_data="2021-12-01T05:00:00 5\n2021-12-01T05:30:00 12\n2021-12-01T06:00:00 14\n")
     @patch('sys.argv', ['automated_traffic_counter.py'])
     def test_main_default_file(self, mock_file):
@@ -293,6 +309,8 @@ class TestAutomatedTrafficCounter(unittest.TestCase):
             main()
             mock_file.assert_called_once_with("custom_data.txt", "r")
             mock_print.assert_called()
+
+    # Test that main function outputs the least cars timestamp message.
 
     @patch('automated_traffic_counter.open', new_callable=mock_open, read_data="2021-12-01T05:00:00 5\n2021-12-01T05:30:00 12\n2021-12-01T06:00:00 14\n")
     @patch('sys.argv', ['automated_traffic_counter.py'])
