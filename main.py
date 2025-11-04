@@ -30,6 +30,7 @@ def main():
         least_ninety_mins_traffic = traffic_analyzer.least_cars_in_ninety_mins()
     )
 
+    print("\nTraffic Analysis Result:\n")
     print(traffic_analysis_result)
 
 if __name__ == "__main__":

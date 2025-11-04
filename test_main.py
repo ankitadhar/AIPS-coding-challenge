@@ -35,9 +35,9 @@ class TestMain(unittest.TestCase):
         with patch('builtins.print') as mock_print:
             main()
             mock_file.assert_called_once_with("./data/data.txt", "r")
-            # Verify print was called (should be 3 times: 2 progress messages + 1 result)
+            # Verify print was called (should be 3 times: 3 progress messages + 1 result)
             self.assertTrue(mock_print.called)
-            self.assertEqual(mock_print.call_count, 3)
+            self.assertEqual(mock_print.call_count, 4)
 
     @patch('traffic_analyzer.open', new_callable=mock_open, read_data="2021-12-01T05:00:00 5\n2021-12-01T05:30:00 12\n2021-12-01T06:00:00 14\n")
     @patch('sys.argv', ['main.py', '--inputfile', 'custom_data.txt'])
@@ -46,9 +46,9 @@ class TestMain(unittest.TestCase):
         with patch('builtins.print') as mock_print:
             main()
             mock_file.assert_called_once_with("custom_data.txt", "r")
-            # Verify print was called (should be 3 times: 2 progress messages + 1 result)
+            # Verify print was called (should be 3 times: 3 progress messages + 1 result)
             self.assertTrue(mock_print.called)
-            self.assertEqual(mock_print.call_count, 3)
+            self.assertEqual(mock_print.call_count, 4)
 
     @patch('main.TrafficAnalyzer')
     @patch('main.TrafficAnalysisResult')
@@ -150,9 +150,10 @@ class TestMain(unittest.TestCase):
         # Verify that specific progress messages are printed
         mock_print.assert_any_call("Analyzing traffic data...")
         mock_print.assert_any_call("Generating traffic analysis report...")
+        mock_print.assert_any_call("\nTraffic Analysis Result:\n")
         
-        # Verify print was called exactly 3 times (2 progress messages + 1 result)
-        self.assertEqual(mock_print.call_count, 3)
+        # Verify print was called exactly 3 times (3 progress messages + 1 result)
+        self.assertEqual(mock_print.call_count, 4)
 
     @patch('main.TrafficAnalyzer')
     @patch('main.TrafficAnalysisResult')
@@ -171,7 +172,7 @@ class TestMain(unittest.TestCase):
         # Verify print is called with the result instance as the final call
         mock_print.assert_any_call(mock_result_instance)
         # Verify print was called 3 times total
-        self.assertEqual(mock_print.call_count, 3)
+        self.assertEqual(mock_print.call_count, 4)
         # Verify the final call was with the result instance
         final_call = mock_print.call_args_list[-1]
         self.assertEqual(final_call[0][0], mock_result_instance)
