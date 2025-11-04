@@ -46,8 +46,9 @@ class TrafficAnalyzer:
         """
         Function to find the timestamp with least number of cars seen in next 90 minutes.
         """
-        least_traffic_ninty_mins = min(self._get_contiguous_ninety_mins_traffic(), key=lambda x: x.car_count)
-        return least_traffic_ninty_mins
+        if self._get_contiguous_ninety_mins_traffic() == []:
+            return TrafficRecord(timestamp="N/A", car_count=0, duration_mins=90)
+        return min(self._get_contiguous_ninety_mins_traffic(), key=lambda x: x.car_count)
 
     def _transform_data(self):
         """

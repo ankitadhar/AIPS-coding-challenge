@@ -6,14 +6,14 @@ def main():
     """
     Main function of the program.
     if --inputfile is provided then the file will passed to TrafficAnalyzer,
-    else the default path ./data.txt will be used.
+    else the default path ./data/data.txt will be used.
     """
     parser = argparse.ArgumentParser()
     parser.add_argument("--inputfile", help="Filepath of machine generated traffic data")
     args = parser.parse_args()
     
     if (not args.inputfile):
-        file_path = "./data.txt"
+        file_path = "./data/data.txt"
     else: 
         file_path = args.inputfile
 
