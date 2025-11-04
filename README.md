@@ -1,7 +1,10 @@
 # AIPS Coding Challenge
 
 ## Solution
-The final solution contains 3 main python files: main.py, traffic_analysis.py, model.py
+The final solution contains 3 main python files: 
+- main.py: entry-point, main method of the program
+- traffic_analysis.py: has the logic
+- model.py: holds models used in the program to store values
 
 To execute run the `main.py` file.
 You can provide the input file from command line as:
@@ -11,6 +14,11 @@ python3 main.py --inputfile data/test_data.txt
 
 if --inputfile is provided then the file will processed in the program, 
 else the default file at `data/data.txt` will be processed to generate output.
+
+### Other solutions
+The python notebook `automated_traffic_counter_basic.py` was a quick way to put my thoughts to check output. Feel free to take look.
+
+The `basic/automated_traffic_counter_basic.py` is a basic python code a conversion of python notebook, which was not very readable and hence moved to basic folder. Feel free to ignore it.
 
 ## The Task
 An automated traffic counter sits by a road and counts the number of cars that go
