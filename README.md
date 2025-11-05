@@ -16,7 +16,7 @@ if --inputfile is provided then the file will processed in the program,
 else the default file at `data/data.txt` will be processed to generate output.
 
 ### Other solutions
-The python notebook `automated_traffic_counter_basic.py` was a quick way to put my thoughts to check output. Feel free to take look.
+The python notebook `AIPS_code_challeng.ipynb` was a quick way to put my thoughts to check output. Feel free to take look.
 
 The `basic/automated_traffic_counter_basic.py` is a basic python code a conversion of python notebook, which was not very readable and hence moved to basic folder. Feel free to ignore it.
 
